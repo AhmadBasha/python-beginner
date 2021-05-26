@@ -8,6 +8,9 @@ from replit import clear
 gameOver = False 
 # record the score
 score = 0
+# take a famous A and B
+A = random.choice(gd.data)
+B = random.choice(gd.data)
 # here to take the name and desc and the country for
 # the famous accounts 
 def info(name,desc,country,switch):
@@ -41,11 +44,11 @@ def check(actual ,userSelected):
 while gameOver == False :
   print(art.logo)
 
-  A = random.choice(gd.data)
-  B = random.choice(gd.data)
   # for score 
   # the result and call compare function 
   result = compare(A["follower_count"],B["follower_count"])
+ 
+
   # to print the info for a and b 
   print(info(A["name"],A["description"],A["country"],True))
   print(info(B["name"],B["description"],B["country"],False))
@@ -53,12 +56,21 @@ while gameOver == False :
   selected = input("Who has more followers? Type 'A' or 'B': ").upper()
   #check the answer 
   final = check(result,selected)
-  # if the return is true from check will increase the score 
+  
+   # to assign the new value 
+  if result == "A":
+    B = random.choice(gd.data)
+  elif result == "B":
+    A = B
+    B = random.choice(gd.data)
+
+# if the return is true from check will increase the score 
   if final == True :
     score +=1
     clear()
     print(f"You Score is : {score}")
   else :
+    clear()
     print(f"Try again your final score is  : {score}")
     gameOver = True 
 
